@@ -1,0 +1,6 @@
+.rotation {
+    transform-box: fill-box;
+    transform-origin: center;
+    transform: rotate(-90deg);
+    transition: 1.5s ease-in-out;
+}
