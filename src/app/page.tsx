@@ -1,12 +1,12 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-import MinimalisticBarGraph from "./components/minimalisticBarGraph";
-import BudgetMeter from "./components/budgetMeter";
-import Velocimeter from "./components/velocimeter";
-import { Button } from "./components/button";
+import MinimalisticBarGraph from "../components/home/minimalisticBarGraph";
+import BudgetMeter from "../components/home/budgetMeter";
+import Velocimeter from "../components/home/velocimeter";
+import { Button } from "../components/home/button";
 import plus from "../../public/plussign.svg"
 import filtro from "../../public/filtro.svg"
-import { Transactions } from "./components/maintable";
+import { Transactions } from "../components/home/maintable";
 
 const mockupData = [
     { label: "jun", value: 99, id: 1 },
@@ -26,7 +26,7 @@ export default function Home() {
       <div style={{display: "flex", alignItems: 'center', justifyContent: 'center'}}>
         {/* <BudgetMeter  percent={0.7} title="Limite de Gastos" loadingAnimation={loadingAnimation} /> */}
         {/* <MinimalisticBarGraph data={mockupData} title="Ganhos Mensais" loadingAnimation={loadingAnimation} /> */}
-        {/* <Velocimeter percent={0.1} title="Meta" /> */}
+        {/* <Velocimeter percent={0.9} title="Meta" /> */}
         {/* <Button text="Filtrar" icon={filtro}/> */}
         {/* <Button text="Nova Transação" icon={plus}/> */}
         {/* <Transactions/> */}
