@@ -25,7 +25,7 @@ export default function MinimalisticBarGraph({ title, data, loadingAnimation = 0
     return (
         <TitledCard title={title}>
             <div className={styles.container}>
-                <svg className={styles.svg} width="235" height="220" viewBox={`0 0 ${viewBox} ${viewBox}`} fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg className={styles.svg} viewBox={`0 0 ${viewBox} ${viewBox}`} fill="none" xmlns="http://www.w3.org/2000/svg">
                     {normalizedValues.map((v, i) => {
                         const x = i * gap + xlpadding
                         const y0 = ytpadding + (barMaxHeight * (1 - v))

@@ -9,7 +9,16 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'primary': '#0ACF83',
+        'primary-foreground': "white",
+        'blackwhite': '#323238',
+      },
+    },
+    fontFamily: {
+      'roboto': ['Roboto', 'sans-serif'],
+    },
   },
   plugins: [],
 }
