@@ -1,14 +1,7 @@
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table"
-
-export type Transaction = {
-    name: string,
-    payment: "Débito" | "Crédito" | "Pix" | "Boleto",
-    value: number,
-    date: string,
-    person: string,
-}
+import { Transaction } from "@/lib/actions/transactions"
 
 export const columns: ColumnDef<Transaction>[] = [
   {
@@ -17,7 +10,7 @@ export const columns: ColumnDef<Transaction>[] = [
   },
   {
     accessorKey: "payment",
-    header: "Cartão",
+    header: "Método de Pagamento",
   },
   {
     accessorKey: "value",

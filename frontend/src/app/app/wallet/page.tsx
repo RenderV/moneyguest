@@ -6,10 +6,16 @@ import BudgetMeter from "@/components/home/budgetMeter"
 import Velocimeter from "@/components/home/velocimeter"
 import MinimalisticBarGraph from "@/components/home/minimalisticBarGraph"
 import MainTable from "@/components/home/mainTable"
+import { getStats, getTransactions } from "@/lib/actions/transactions"
+import { isTokenValid } from "@/lib/actions/auth"
+import { get } from "http"
+import { getCurrentUserServer } from "@/lib/sutils"
+import { useLogout } from "@/hooks/auth"
+import { createPortal } from "react-dom"
 
-export default function Page() {
+export default async function Page() {
     const value = 200
-
+    const stats = await getStats()
     return (
         <div className="flex flex-col">
             <h1 className="text-3xl text-primary font-bold mt-8 ml-5 block">Carteira</h1>
@@ -21,7 +27,7 @@ export default function Page() {
                                 <p className="d-block">Entradas</p>
                                 <Image src={inIcon} alt="Incomes" width={32} height={32} />
                             </div>
-                            <p className="font-bold text-xl">{value.toLocaleString('pt-br', { style: "currency", currency: "BRL" })}</p>
+                            <p className="font-bold text-xl">{stats.positive.toLocaleString('pt-br', { style: "currency", currency: "BRL" })}</p>
                         </div>
                     </div>
                 </div>
@@ -33,7 +39,7 @@ export default function Page() {
                                 <p className="d-block">Saídas</p>
                                 <Image src={outIcon} alt="Incomes" width={32} height={32} />
                             </div>
-                            <p className="font-bold text-xl">{value.toLocaleString('pt-br', { style: "currency", currency: "BRL" })}</p>
+                            <p className="font-bold text-xl">{(Math.abs(stats.negative)).toLocaleString('pt-br', { style: "currency", currency: "BRL" })}</p>
                         </div>
                     </div>
                 </div>
@@ -45,7 +51,7 @@ export default function Page() {
                                 <p className="d-block">Saldo Atual</p>
                                 <Image src={dollar} alt="Incomes" width={32} height={32} />
                             </div>
-                            <p className="font-bold text-xl">{value.toLocaleString('pt-br', { style: "currency", currency: "BRL" })}</p>
+                            <p className="font-bold text-xl">{stats.total.toLocaleString('pt-br', { style: "currency", currency: "BRL" })}</p>
                         </div>
                     </div>
                 </div>
@@ -55,7 +61,6 @@ export default function Page() {
             <div className="flex flex-row mt-4 mx-3 justify-between flex-wrap mx-5 gap-4">
                 <MainTable />
             </div>
-
         </div>
     )
 }

@@ -2,6 +2,7 @@
 
 import { User } from "@/app/types/user";
 import axios from "axios";
+import { getCurrentUserServer } from "../sutils";
 
 const ax = axios.create({
     baseURL: "http://backend:8000/dj-rest-auth/",
@@ -57,12 +58,11 @@ export async function registerUser({
     } as User;
 }
 
-export async function validateToken(token: string): Promise<boolean> {
-    return ax
-        .post("/token/verify/", {
-            token,
-        })
-        .then((res) => {
-            return res.status === 200;
-        });
+export async function isTokenValid(token: string) {
+    try{
+        await ax.post("/token/verify/", { token });
+        return true;
+    } catch (e) {
+        return false
+    }
 }

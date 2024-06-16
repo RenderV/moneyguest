@@ -12,6 +12,8 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useLogout } from "@/hooks/auth";
 import { getCurrentUserClient } from "@/lib/utils";
+import { useState } from "react";
+import SettingsPopup from "@/components/common/settingsPopup";
 
 function NavItem({ href, icon, text }: {
     href: string,
@@ -38,6 +40,7 @@ export default function Navbar() {
     const user = getCurrentUserClient()
     const username = user?.username || ""
     const email = user?.email || ""
+    const [settingOpen, setSettingOpen] = useState(false)
 
     return (
         <div className={styles.nav}>
@@ -61,18 +64,19 @@ export default function Navbar() {
                         <p>{email}</p>
                     </div>
                 </div>
-                <Link href="/settings">
+                <a href="#" onClick={() => setSettingOpen(true)}>
                     <div className="mt-5 gap-2 flex flex-row text-sm">
                         <Image src={settingIcon} alt="Settings" />
                         Configurações
                     </div>
-                </Link>
+                </a>
                 <button onClick={handleLogout}>
                     <div className="mt-4 gap-2 flex flex-row text-sm">
                         <Image src={exitIcon} alt="Exit" />
                         Sair
                     </div>
                 </button>
+                <SettingsPopup isOpen={settingOpen} onClose={() => setSettingOpen(false)} />
             </div>
         </div>
     )
