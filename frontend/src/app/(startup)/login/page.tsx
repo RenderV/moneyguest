@@ -5,21 +5,31 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormInput } from '@/components/common/formInput';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useLogin } from '@/hooks/auth';
 
 const schema = z.object({
-    email: z.string().email({ message: "E-mail inválido" }),
+    username: z.string().min(3, { message: "Nome de usuário deve conter ao menos 3 caracteres." }),
     password: z.string().min(6, { message: "Senha deve conter ao menos 6 caracteres." }),
 });
 
 type FormData = z.infer<typeof schema>;
 
 export default function Page() {
-    const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
+    const {login} = useLogin();
+    const router = useRouter();
+
+    const { setError, register, handleSubmit, formState: { errors } } = useForm<FormData>({
         resolver: zodResolver(schema)
     });
 
-    const onSubmit = (data: FormData) => {
-        console.log(data);
+    const onSubmit = async (data: FormData) => {
+        try{
+            const user = await login(data.username, data.password)
+        } catch (error) {
+            setError("username", { message: "Usuário ou senha inválidos." })
+        }
+        router.push("/app/wallet")
     };
 
     return (
@@ -28,11 +38,11 @@ export default function Page() {
             <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col items-center">
                 <div className="mt-8 w-[80%]">
                     <FormInput
-                        placeholder="Email"
+                        placeholder="Username"
                         className="w-full h-10"
-                        {...register('email')}
+                        {...register('username')}
                     />
-                    {errors.email && <p className="text-red-500">{errors.email.message}</p>}
+                    {errors.username && <p className="text-red-500">{errors.username.message}</p>}
                 </div>
                 <div className="mt-3 w-[80%]">
                     <FormInput

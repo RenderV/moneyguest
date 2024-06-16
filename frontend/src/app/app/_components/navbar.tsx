@@ -9,7 +9,9 @@ import walletIcon from "/public/wallet.svg"
 import settingIcon from "/public/settings.svg"
 import exitIcon from "/public/exit.svg"
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useLogout } from "@/hooks/auth";
+import { getCurrentUserClient } from "@/lib/utils";
 
 function NavItem({ href, icon, text }: {
     href: string,
@@ -27,6 +29,15 @@ function NavItem({ href, icon, text }: {
 }
 
 export default function Navbar() {
+    const { logout } = useLogout()
+    const router = useRouter()
+    const handleLogout = async () => {
+        logout()
+        router.push("/login")
+    }
+    const user = getCurrentUserClient()
+    const username = user?.username || ""
+    const email = user?.email || ""
 
     return (
         <div className={styles.nav}>
@@ -46,8 +57,8 @@ export default function Navbar() {
                         <Image src={profileIcon} alt="profile" />
                     </div>
                     <div className="w-10 text-xs text-nowrap my-auto">
-                        <p className="text-sm font-bold text-primary">Cesar Augusto</p>
-                        <p>cesaraugusto@gmail.com</p>
+                        <p className="text-sm font-bold text-primary">{username}</p>
+                        <p>{email}</p>
                     </div>
                 </div>
                 <Link href="/settings">
@@ -56,12 +67,12 @@ export default function Navbar() {
                         Configurações
                     </div>
                 </Link>
-                <Link href="/signout">
+                <button onClick={handleLogout}>
                     <div className="mt-4 gap-2 flex flex-row text-sm">
                         <Image src={exitIcon} alt="Exit" />
                         Sair
                     </div>
-                </Link>
+                </button>
             </div>
         </div>
     )

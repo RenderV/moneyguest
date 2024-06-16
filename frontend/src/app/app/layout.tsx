@@ -1,5 +1,5 @@
-import Navbar from "./_components/navbar";
-
+import dynamic from 'next/dynamic'
+const Navbar = dynamic(() => import('./_components/navbar'), { ssr: false })
 
 export default function AppLayout({ children }: {
     children: React.ReactNode;

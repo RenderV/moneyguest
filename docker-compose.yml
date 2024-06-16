@@ -1,5 +1,5 @@
 services:
-  app:
+  backend:
     build:
       context: ./backend
     command: >
@@ -36,4 +36,5 @@ services:
     volumes:
       - ./frontend:/app:Z
     depends_on:
-      - app
+      - backend
+    command: npm run dev
