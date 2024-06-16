@@ -26,10 +26,11 @@ export default function Page() {
     const onSubmit = async (data: FormData) => {
         try{
             const user = await login(data.username, data.password)
+            if(user)
+                router.push("/app/wallet")
         } catch (error) {
             setError("username", { message: "Usuário ou senha inválidos." })
         }
-        router.push("/app/wallet")
     };
 
     return (
