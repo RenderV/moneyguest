@@ -5,7 +5,6 @@ import { cookies } from "next/headers";
 
 export default function createAxiosInstance() {
     const user = getCurrentUserServer();
-    const cookieStore = cookies();
     if(!user) {
         throw new Error("User not found");
     }

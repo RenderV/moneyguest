@@ -11,7 +11,8 @@ const schema = z.object({
     name: z.string().min(1, { message: "Nome da transação é obrigatório." }),
     value: z.coerce.number(),
     person: z.string().min(1, { message: "Pessoa é obrigatória." }),
-    payment: z.string().min(1, { message: "Forma de pagamento é obrigatória." })
+    payment: z.string().min(1, { message: "Forma de pagamento é obrigatória." }),
+    date : z.string().optional()
 });
 
 type FormData = z.infer<typeof schema>;
@@ -35,7 +36,8 @@ export default function SpendingPopup({
                 name: data.name,
                 value: data.value,
                 person: data.person,
-                payment: data.payment
+                payment: data.payment,
+                date: data.date ? data.date : undefined
             })
             if(onSubmitSuccess) onSubmitSuccess(tran)
             if(onClose) onClose()
@@ -68,7 +70,7 @@ export default function SpendingPopup({
         createPortal(<>
             <div className={`z-50 transition-opacity absolute top-0 left-0 bg-black w-screen h-screen ${opacityBackground}`} onClick={onClose}/>
             <div className={`z-50 transition transition-opacity absolute top-1/2 left-1/2 translate-y-[-50%] translate-x-[-50%] flex flex-col items-center w-[40%] min-w-[400px] h-[70%] bg-black m-auto rounded-2xl shadow-2xl text-white ${opacityPopup}`}>
-                <h1 className="font-bold text-2xl mt-24">Adicionar Nova Transação</h1>
+                <h1 className="font-bold text-2xl mt-16">Adicionar Nova Transação</h1>
                 <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col items-center">
                     <div className="mt-8 w-[80%]">
                         <FormInput
@@ -103,6 +105,15 @@ export default function SpendingPopup({
                             {...register('payment')}
                         />
                         {errors.payment && <p className="text-red-500">{errors.payment.message}</p>}
+                    </div>
+                    <div className="mt-3 w-[80%]">
+                        <FormInput
+                            type='datetime-local'
+                            placeholder="Data"
+                            className="w-full h-10"
+                            {...register('date')}
+                        />
+                        {errors.date && <p className="text-red-500">{errors.date.message}</p>}
                     </div>
                     <button type="submit" className="mt-6 w-[80%] h-10 bg-primary rounded">Adicionar</button>
                     <a href="#" onClick={onClose}>

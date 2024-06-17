@@ -25,20 +25,34 @@ export async function createTransaction({
     value,
     person,
     payment,
+    date
 }: {
     name: string
     value: number
     person: string
     payment: string
+    date?: string
 }): Promise<Transaction> {
     const ax = createAxiosInstance()
 
-    const res = await ax.post("/transactions/", {
+    const payload: {
+        name: string
+        value: number
+        person: string
+        payment: string
+        date?: string
+    } = {
         name,
         value,
         person,
         payment,
-    })
+    }
+
+    if(date){
+        payload["date"] = date
+    }
+
+    const res = await ax.post("/transactions/", payload)
     return {
         name: res.data.name,
         value: res.data.value,
