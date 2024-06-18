@@ -74,7 +74,7 @@ export default function SpendingPopup({
                 <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col items-center">
                     <div className="mt-8 w-[80%]">
                         <FormInput
-                            placeholder="Nome da Transação"
+                            placeholder="Nome da Transação*"
                             className="w-full h-10"
                             {...register('name')}
                         />
@@ -82,7 +82,7 @@ export default function SpendingPopup({
                     </div>
                     <div className="mt-3 w-[80%]">
                         <FormInput
-                            placeholder="Valor"
+                            placeholder="Valor*"
                             type="number"
                             step="0.01"
                             className="w-full h-10"
@@ -92,7 +92,7 @@ export default function SpendingPopup({
                     </div>
                     <div className="mt-3 w-[80%]">
                         <FormInput
-                            placeholder="Pessoa"
+                            placeholder="Pessoa*"
                             className="w-full h-10"
                             {...register('person')}
                         />
@@ -100,7 +100,7 @@ export default function SpendingPopup({
                     </div>
                     <div className="mt-3 w-[80%]">
                         <FormInput
-                            placeholder="Forma de Pagamento"
+                            placeholder="Forma de Pagamento*"
                             className="w-full h-10"
                             {...register('payment')}
                         />

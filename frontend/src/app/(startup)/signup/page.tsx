@@ -61,7 +61,7 @@ export default function Page() {
                 </div>
                 <div className="mt-3 w-[80%]">
                     <FormInput
-                        placeholder="Password"
+                        placeholder="Senha"
                         type="password"
                         className="w-full h-10"
                         {...register('password')}
@@ -70,7 +70,7 @@ export default function Page() {
                 </div>
                 <div className="mt-3 w-[80%]">
                     <FormInput
-                        placeholder="Confirm Password"
+                        placeholder="Confirme a Senha"
                         type="password"
                         className="w-full h-10"
                         {...register('confirmPassword')}

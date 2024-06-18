@@ -2,19 +2,10 @@ import Image from "next/image"
 import inIcon from "/public/income.svg"
 import outIcon from "/public/outcome.svg"
 import dollar from "/public/dollar.svg"
-import BudgetMeter from "@/components/home/budgetMeter"
-import Velocimeter from "@/components/home/velocimeter"
-import MinimalisticBarGraph from "@/components/home/minimalisticBarGraph"
 import MainTable from "@/components/home/mainTable"
-import { getStats, getTransactions } from "@/lib/actions/transactions"
-import { isTokenValid } from "@/lib/actions/auth"
-import { get } from "http"
-import { getCurrentUserServer } from "@/lib/sutils"
-import { useLogout } from "@/hooks/auth"
-import { createPortal } from "react-dom"
+import { getStats } from "@/lib/actions/transactions"
 
 export default async function Page() {
-    const value = 200
     const stats = await getStats()
     return (
         <div className="flex flex-col">
