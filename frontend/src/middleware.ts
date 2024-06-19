@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 import { getCurrentUserServer } from "./lib/sutils"
-import { isTokenValid, refreshToken } from "./lib/actions/auth"
+import { isTokenValid } from "./lib/actions/auth"
 
 const authRoutes = ["/login", "/register"]
 const protectedRoutes = ["/app/wallet"]

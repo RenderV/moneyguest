@@ -37,4 +37,4 @@ services:
       - ./frontend:/app:Z
     depends_on:
       - backend
-    command: npm run dev
+    command: npm run start
