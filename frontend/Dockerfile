@@ -1,8 +1,11 @@
-FROM node:21
-WORKDIR /app
-COPY . .
-RUN npm install
-RUN npm run build
-EXPOSE 3000
+FROM node:20-alpine
 
-CMD ["npm", "run", "start"]
+WORKDIR /app
+
+COPY ./frontend/package.json ./
+
+RUN npm install
+
+COPY ./frontend .
+
+CMD ["npm", "run", "dev"]
