@@ -35,7 +35,7 @@ export default function Page() {
             if(user)
                 router.push('/app/wallet')
         } catch (error) {
-            setError('username', { message: "Um erro ocorreu. Tente novamente com um nome de usuário ou email distintos." });
+            setError('username', { message: "Um erro ocorreu. Tente novamente com um nome de usuário, email ou senha distintos.\nCertifique-se que a senha não é semelhante ao usuário ou comum." });
         }
     };
 

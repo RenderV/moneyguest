@@ -20,20 +20,5 @@ export default function createAxiosInstance() {
         },
     });
 
-    ax.interceptors.response.use(
-        (response) => response,
-        async (error) => {
-            if (error.response?.status === 401) {
-                const token = getCurrentUserServer()?.accessToken;
-                if(!token) {
-                    return Promise.reject(error);
-                }
-                const validToken = await isTokenValid(token);
-                if(!validToken)
-                    cookies().delete("currentUser");
-            }
-            return Promise.reject(error);
-        }
-    );
     return ax
 }
